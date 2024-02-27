@@ -310,10 +310,11 @@ void WorldSession::HandleWhoOpcode(WorldPacket& recvData)
 
         // check if target's level is in level range
         uint8 lvl = target.GetLevel();
-        if (lvl < levelMin || lvl > levelMax)
-        {
-            continue;
-        }
+        //Disabled for 255 Fun Purposes
+        //if (lvl < levelMin || lvl > levelMax)
+        //{
+        //    continue;
+        //}
 
         // check if class matches classmask
         uint8 class_ = target.GetClass();
