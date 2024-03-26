@@ -5040,7 +5040,7 @@ float Player::GetMeleeCritFromAgility()
         return 0.0f;
 
     float crit = critBase->base + GetStat(STAT_AGILITY) * critRatio->ratio;
-    return crit * 100.0f;
+    return crit / 133.0f ; //nerfed normally * 100.0f but removed
 }
 
 void Player::GetDodgeFromAgility(float& diminishing, float& nondiminishing)
@@ -5048,32 +5048,32 @@ void Player::GetDodgeFromAgility(float& diminishing, float& nondiminishing)
     // Table for base dodge values
     const float dodge_base[MAX_CLASSES] =
     {
-        0.036640f, // Warrior
-        0.034943f, // Paladi
+        0.030640f, // Warrior
+        0.030640f, // Paladi
         -0.040873f, // Hunter
         0.020957f, // Rogue
         0.034178f, // Priest
         0.036640f, // DK
-        0.021080f, // Shaman
+        0.010957f, // Shaman
         0.036587f, // Mage
         0.024211f, // Warlock
         0.0f,      // ??
-        0.056097f  // Druid
+        0.000957f  // Druid
     };
     // Crit/agility to dodge/agility coefficient multipliers; 3.2.0 increased required agility by 15%
     const float crit_to_dodge[MAX_CLASSES] =
     {
         0.85f / 1.15f,  // Warrior
         1.00f / 1.15f,  // Paladin
-        1.11f / 1.15f,  // Hunter
-        2.00f / 1.15f,  // Rogue
+        0.01f / 1.15f,  // Hunter
+        0.90f / 1.15f,  // Rogue
         1.00f / 1.15f,  // Priest
         0.85f / 1.15f,  // DK
-        1.60f / 1.15f,  // Shaman
+        0.15f / 1.15f,  // Shaman
         1.00f / 1.15f,  // Mage
         0.97f / 1.15f,  // Warlock (?)
         0.0f,           // ??
-        2.00f / 1.15f   // Druid
+        0.15f / 1.15f   // Druid
     };
 
     uint8 level = GetLevel();
@@ -5092,8 +5092,9 @@ void Player::GetDodgeFromAgility(float& diminishing, float& nondiminishing)
     float bonus_agility = GetStat(STAT_AGILITY) - base_agility;
 
     // calculate diminishing (green in char screen) and non-diminishing (white) contribution
-    diminishing = 100.0f * bonus_agility * dodgeRatio->ratio * crit_to_dodge[pclass - 1];
-    nondiminishing = 100.0f * (dodge_base[pclass - 1] + base_agility * dodgeRatio->ratio * crit_to_dodge[pclass - 1]);
+    // normally 100.0f * , NERFED to 2
+    diminishing = (bonus_agility * dodgeRatio->ratio * crit_to_dodge[pclass - 1]);
+    nondiminishing = (dodge_base[pclass - 1] + base_agility * dodgeRatio->ratio * crit_to_dodge[pclass - 1]);
 }
 
 float Player::GetSpellCritFromIntellect()
@@ -5110,7 +5111,7 @@ float Player::GetSpellCritFromIntellect()
         return 0.0f;
 
     float crit = critBase->base + GetStat(STAT_INTELLECT) * critRatio->ratio;
-    return crit * 100.0f;
+    return crit / 100.0f ; // normally crit * 100.0f NERFED 255
 }
 
 float Player::GetRatingMultiplier(CombatRating cr) const
