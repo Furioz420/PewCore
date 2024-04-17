@@ -122,8 +122,11 @@ enum Races
 
 
 #define RACEMASK_ALLIANCE \
-    ((1<<(RACE_HUMAN-1))               | (1<<(RACE_DWARF-1))           | (1<<(RACE_NIGHTELF-1)) | \
-     (1<<(RACE_GNOME-1))               | (1<<(RACE_DRAENEI-1)))
+    ((1<<(RACE_HUMAN-1))               | (1<<(RACE_DWARF-1))              | (1<<(RACE_NIGHTELF-1)) | \
+     (1<<(RACE_GNOME-1))               | (1<<(RACE_DRAENEI-1))            | (1<<(RACE_KULTIRAN-1)) | \
+     (1<<(RACE_DARKIRONDWARF-1))       | (1<<(RACE_ILLIDARI_NIGHTELF-1))  | (1<<(RACE_HIGHELF-1))  | \
+     (1<<(RACE_VOIDELF-1))             | (1<<(RACE_LIGHTFORGED-1))        | (1<<(RACE_WORGEN-1))   | \
+     (1<<(RACE_DRACTHYR_A-1))          | (1<<(RACE_PANDAREN_A-1)))
 
 #define RACEMASK_HORDE RACEMASK_ALL_PLAYABLE & ~RACEMASK_ALLIANCE
 
